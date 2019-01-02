@@ -1,25 +1,30 @@
 #!/bin/sh
+
+nodesNumber=$1
 SOURCE_DIR=dbscripts
-SEQ_START=2
-SEQ_INC=2
-DEST_DIR=dbscripts_$SEQ_START
+DEST_DIR_PREFIX=dbscripts_
 
 echo "Starting sequence updator"
 
 echo "Cleaning up workspace"
-rm $DEST_DIR.zip
-rm -r $DEST_DIR
-
-echo "Creating new workspace"
-cp -r $SOURCE_DIR $DEST_DIR
-
-
-for filename in $(find $DEST_DIR -name 'oracle.sql'); do
-  echo "Updating $filename"
-  sed -i '' "s/START WITH 1 INCREMENT BY 1/START WITH $SEQ_START INCREMENT BY $SEQ_INC/g" $filename
-
+for i in $(seq 1 $nodesNumber); do
+  rm $DEST_DIR_PREFIX$i.zip
+  rm -r $DEST_DIR_PREFIX$i
 done
 
+echo "Creating new workspace"
+for i in $(seq 1 $nodesNumber); do
+  cp -r $SOURCE_DIR $DEST_DIR_PREFIX$i
+done
 
-zip -r $DEST_DIR.zip $DEST_DIR/
+for i in $(seq 1 $nodesNumber); do
+  for filename in $(find $DEST_DIR_PREFIX$i -name 'oracle.sql'); do
+    echo "Updating $filename"
+    sed -i "s/START WITH 1 INCREMENT BY 1/START WITH $i INCREMENT BY $nodesNumber/g" $filename
+  done
+done
+
+for i in $(seq 1 $nodesNumber); do
+  zip -r $DEST_DIR_PREFIX$i.zip $DEST_DIR_PREFIX$i/
+done
 echo "Sequence updator completed successfully"
