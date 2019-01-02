@@ -11,9 +11,9 @@ This project is done to overcome that issue for WSO2 Identity Server.
 ## How to use
 
 1. Download the script [db_sequence_updator.sh](db_sequence_updator.sh) 
-2. Copy xxx to CARBON_HOME
-3. Run the sript by giving number of nodes in your database cluster.
-Example: `sh db_sequence_updator.sh 2`
+2. Copy db_sequence_updator.sh to CARBON_HOME. Example `mv db_sequence_updator.sh ~/wso2_products/wso2is-5.7.0/`
+3. Change directory to CARBON_HOME. Example `cd ~/wso2_products/wso2is-5.7.0/`
+4. Run the sript by giving number of nodes in your database cluster. Example: `sh db_sequence_updator.sh 2`
 
 ## Roadmap & Contributions
 
