@@ -12,7 +12,7 @@ This project is done to overcome that issue for WSO2 Identity Server.
 
 1. Download the script [db_sequence_updator.sh](db_sequence_updator.sh) 
 2. Copy xxx to CARBON_HOME
-3. Run the sript by giving number of nodes in your database cluster
+3. Run the sript by giving number of nodes in your database cluster.
 Example: `sh db_sequence_updator.sh 2`
 
 ## Roadmap & Contributions
